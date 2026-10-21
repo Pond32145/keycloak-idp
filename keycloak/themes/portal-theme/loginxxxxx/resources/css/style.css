@@ -1,0 +1,436 @@
+
+/* =========================================================
+   TOMORROW IS TODAY — PORTAL IDENTITY THEME
+   Modern Enterprise / Spatial / Elegant
+   ========================================================= */
+
+body.theme-portal {
+  color-scheme: light;
+
+  --portal-ink: #172554;
+  --portal-navy: #101d40;
+  --portal-blue: #3559d8;
+  --portal-blue-light: #7895ff;
+  --portal-text: #172033;
+  --portal-muted: #64748b;
+  --portal-border: #e4e9f2;
+  --portal-surface: #ffffff;
+  --portal-focus: #a5baff;
+
+  --pf-v5-global--primary-color--100: var(--portal-blue);
+  --pf-v5-global--primary-color--200: var(--portal-navy);
+}
+
+/* ---------- BACKGROUND ---------- */
+
+body.theme-portal #keycloak-bg {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      ellipse at 15% 20%,
+      rgba(100, 130, 255, 0.22),
+      transparent 36%
+    ),
+    radial-gradient(
+      ellipse at 85% 80%,
+      rgba(89, 116, 220, 0.20),
+      transparent 34%
+    ),
+    linear-gradient(
+      135deg,
+      #101a37 0%,
+      #192951 48%,
+      #263d75 100%
+    );
+}
+
+/* Geometric spatial decoration */
+
+body.theme-portal #keycloak-bg::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 620px;
+  height: 620px;
+  top: -220px;
+  right: -110px;
+
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 0 42px rgba(255, 255, 255, 0.025),
+    0 0 0 96px rgba(255, 255, 255, 0.025),
+    0 0 0 155px rgba(255, 255, 255, 0.018);
+
+  pointer-events: none;
+}
+
+body.theme-portal #keycloak-bg::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 380px;
+  height: 380px;
+  bottom: -230px;
+  left: -100px;
+
+  border: 1px solid rgba(180, 199, 255, 0.2);
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 0 35px rgba(180, 199, 255, 0.035),
+    0 0 0 75px rgba(180, 199, 255, 0.025);
+
+  pointer-events: none;
+}
+
+/* ---------- LOGIN LAYOUT ---------- */
+
+body.theme-portal .pf-v5-c-login__container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 460px;
+  margin-inline: auto;
+  padding: 24px;
+}
+
+body.theme-portal .pf-v5-c-login__main {
+  position: relative;
+  overflow: hidden;
+
+  padding: 40px 36px 30px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 24px;
+
+  background: rgba(255, 255, 255, 0.97);
+
+  box-shadow:
+    0 30px 90px rgba(3, 10, 32, 0.32),
+    0 4px 12px rgba(3, 10, 32, 0.08);
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Fine decorative line */
+
+body.theme-portal .pf-v5-c-login__main::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+
+  background: linear-gradient(
+    90deg,
+    #182b61,
+    #456be9,
+    #a7bbff
+  );
+}
+
+/* ---------- BRAND / HEADER ---------- */
+
+body.theme-portal #kc-header-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  text-align: center;
+}
+
+body.theme-portal #kc-header-wrapper::before {
+  content: "";
+  display: inline-block;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+
+  background: url("../img/logo.svg") center / contain no-repeat;
+}
+
+/* Login heading */
+
+body.theme-portal .pf-v5-c-title,
+body.theme-portal #kc-page-title {
+  color: var(--portal-text);
+  font-weight: 750;
+  letter-spacing: -0.045em;
+  line-height: 1.3;
+}
+
+body.theme-portal #kc-page-title {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+/* Custom tagline from login.ftl */
+
+body.theme-portal .brand-tagline {
+  margin: 0 0 28px;
+  color: var(--portal-muted);
+  font-size: 0.9rem;
+  line-height: 1.75;
+  text-align: left;
+}
+
+/* ---------- FORM ---------- */
+
+body.theme-portal .pf-v5-c-form__label,
+body.theme-portal label {
+  color: #34415a;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+body.theme-portal .pf-v5-c-form__group {
+  margin-bottom: 20px;
+}
+
+body.theme-portal input:not([type="checkbox"]):not([type="radio"]),
+body.theme-portal .pf-v5-c-form-control {
+  min-height: 48px;
+  padding: 0 14px;
+
+  color: var(--portal-text);
+  background-color: #ffffff;
+
+  border: 1px solid #dce3ef;
+  border-radius: 11px;
+
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.025);
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease;
+}
+
+body.theme-portal input::placeholder {
+  color: #94a3b8;
+}
+
+body.theme-portal input:not([type="checkbox"]):not([type="radio"]):hover,
+body.theme-portal .pf-v5-c-form-control:hover {
+  border-color: #aab9d4;
+}
+
+body.theme-portal input:not([type="checkbox"]):not([type="radio"]):focus,
+body.theme-portal .pf-v5-c-form-control:focus {
+  border-color: var(--portal-blue);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(53, 89, 216, 0.12);
+  outline: none;
+}
+
+/* Password reveal button */
+
+body.theme-portal .pf-v5-c-button.pf-m-control {
+  border-radius: 10px;
+}
+
+/* ---------- PRIMARY LOGIN BUTTON ---------- */
+
+body.theme-portal .pf-v5-c-button.pf-m-primary {
+  width: 100%;
+  min-height: 49px;
+  margin-top: 8px;
+
+  color: #ffffff;
+  background: linear-gradient(110deg, #243d99, #3559d8);
+  border: 1px solid transparent;
+  border-radius: 11px;
+
+  font-size: 0.95rem;
+  font-weight: 650;
+  letter-spacing: 0.005em;
+
+  box-shadow: 0 5px 14px rgba(40, 70, 175, 0.2);
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    filter 180ms ease;
+}
+
+body.theme-portal .pf-v5-c-button.pf-m-primary:hover {
+  color: #ffffff;
+  background: linear-gradient(110deg, #1b307c, #294bc4);
+  border-color: transparent;
+
+  box-shadow: 0 8px 20px rgba(40, 70, 175, 0.28);
+  transform: translateY(-1px);
+}
+
+body.theme-portal .pf-v5-c-button.pf-m-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(40, 70, 175, 0.18);
+}
+
+/* ---------- LINKS / OPTIONS ---------- */
+
+body.theme-portal a,
+body.theme-portal #kc-registration a,
+body.theme-portal .pf-v5-c-form__group a {
+  color: #3154c5;
+  font-weight: 550;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+body.theme-portal a:hover {
+  color: #1a2e77;
+  text-decoration: underline;
+}
+
+body.theme-portal input[type="checkbox"] {
+  accent-color: var(--portal-blue);
+}
+
+body.theme-portal #kc-registration-container {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--portal-border);
+  color: var(--portal-muted);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+/* Social login */
+
+body.theme-portal .pf-v5-c-login__main-footer {
+  margin-top: 20px;
+}
+
+/* Error and notification messages */
+
+body.theme-portal .pf-v5-c-alert {
+  margin-bottom: 18px;
+  border-radius: 10px;
+}
+
+/* ---------- ACCESSIBILITY ---------- */
+
+body.theme-portal button:focus-visible,
+body.theme-portal a:focus-visible,
+body.theme-portal input:focus-visible {
+  outline: 3px solid var(--portal-focus);
+  outline-offset: 3px;
+}
+
+/* ---------- DARK MODE ---------- */
+
+html.pf-v5-theme-dark body.theme-portal {
+  color-scheme: dark;
+
+  --portal-text: #f1f5f9;
+  --portal-muted: #a7b5cc;
+  --portal-border: #2a3854;
+}
+
+html.pf-v5-theme-dark body.theme-portal #keycloak-bg {
+  background:
+    radial-gradient(
+      ellipse at 15% 20%,
+      rgba(65, 93, 184, 0.2),
+      transparent 38%
+    ),
+    linear-gradient(
+      135deg,
+      #080e1e,
+      #101a32 55%,
+      #19294b
+    );
+}
+
+html.pf-v5-theme-dark body.theme-portal .pf-v5-c-login__main {
+  background: rgba(17, 27, 48, 0.97);
+  border-color: rgba(148, 163, 184, 0.16);
+
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.4);
+}
+
+html.pf-v5-theme-dark body.theme-portal .pf-v5-c-title,
+html.pf-v5-theme-dark body.theme-portal #kc-page-title {
+  color: #f1f5f9;
+}
+
+html.pf-v5-theme-dark body.theme-portal .brand-tagline {
+  color: #a7b5cc;
+}
+
+html.pf-v5-theme-dark body.theme-portal .pf-v5-c-form__label,
+html.pf-v5-theme-dark body.theme-portal label {
+  color: #d6dfed;
+}
+
+html.pf-v5-theme-dark body.theme-portal input:not([type="checkbox"]):not([type="radio"]),
+html.pf-v5-theme-dark body.theme-portal .pf-v5-c-form-control {
+  color: #f1f5f9;
+  background-color: #111c32;
+  border-color: #34435f;
+}
+
+html.pf-v5-theme-dark body.theme-portal input::placeholder {
+  color: #8595af;
+}
+
+html.pf-v5-theme-dark body.theme-portal a,
+html.pf-v5-theme-dark body.theme-portal #kc-registration a {
+  color: #9db4ff;
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 480px) {
+  body.theme-portal .pf-v5-c-login__container {
+    padding: 16px;
+  }
+
+  body.theme-portal .pf-v5-c-login__main {
+    padding: 32px 22px 24px;
+    border-radius: 20px;
+  }
+
+  body.theme-portal #kc-header-wrapper {
+    font-size: 1.05rem;
+  }
+
+  body.theme-portal #kc-header-wrapper::before {
+    flex-basis: 30px;
+    width: 30px;
+    height: 30px;
+  }
+
+  body.theme-portal #kc-page-title {
+    font-size: 1.55rem;
+  }
+
+  body.theme-portal #keycloak-bg::before {
+    right: -430px;
+  }
+}
+
+/* Respect reduced motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+  body.theme-portal *,
+  body.theme-portal *::before,
+  body.theme-portal *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

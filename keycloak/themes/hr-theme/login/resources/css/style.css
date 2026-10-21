@@ -1,0 +1,122 @@
+/*
+ * hr-theme — professional, trustworthy, employee-oriented identity.
+ * Scoped entirely under `body.theme-hr` (set via theme.properties'
+ * kcBodyClass) and layered on top of the inherited PatternFly styles.
+ */
+
+body.theme-hr {
+  --brand-900: #0b4a44;
+  --brand-700: #0f766e;
+  --brand-500: #14b8a6;
+  --brand-300: #99f6e4;
+  --brand-surface: #ffffff;
+  --brand-text: #0f2b27;
+}
+
+body.theme-hr #keycloak-bg {
+  background: linear-gradient(160deg, #0b4a44 0%, #0f766e 50%, #14b8a6 100%);
+  min-height: 100vh;
+}
+
+body.theme-hr .pf-v5-c-login__container {
+  max-width: 1100px;
+}
+
+body.theme-hr .pf-v5-c-login__main {
+  background: var(--brand-surface);
+  border-radius: 14px;
+  box-shadow: 0 18px 50px rgba(5, 40, 36, 0.35);
+  padding: 2.5rem 2.5rem 1.5rem;
+}
+
+body.theme-hr #kc-header-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+body.theme-hr #kc-header-wrapper::before {
+  content: "";
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background: url("../img/logo.svg") center / contain no-repeat;
+  flex-shrink: 0;
+}
+
+body.theme-hr .pf-v5-c-title,
+body.theme-hr #kc-page-title {
+  color: var(--brand-text);
+}
+
+body.theme-hr .brand-tagline {
+  margin: -0.25rem 0 1.25rem;
+  color: #3f615c;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+body.theme-hr .pf-v5-c-button.pf-m-primary {
+  background-color: var(--brand-700);
+  border-color: var(--brand-700);
+}
+
+body.theme-hr .pf-v5-c-button.pf-m-primary:hover,
+body.theme-hr .pf-v5-c-button.pf-m-primary:focus {
+  background-color: var(--brand-900);
+  border-color: var(--brand-900);
+}
+
+body.theme-hr a,
+body.theme-hr #kc-registration a,
+body.theme-hr .pf-v5-c-form__group a {
+  color: var(--brand-700);
+}
+
+body.theme-hr a:hover {
+  color: var(--brand-900);
+  text-decoration: underline;
+}
+
+/* Keep focus rings clearly visible for keyboard navigation (WCAG 2.4.7). */
+body.theme-hr input:focus,
+body.theme-hr .pf-v5-c-form-control:focus-within,
+body.theme-hr button:focus-visible,
+body.theme-hr a:focus-visible {
+  outline: 3px solid var(--brand-300);
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  body.theme-hr .pf-v5-c-login__main {
+    padding: 1.5rem 1.25rem 1rem;
+    border-radius: 10px;
+  }
+
+  body.theme-hr #kc-header-wrapper::before {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+/* Dark mode: the inherited template toggles this class based on the
+   visitor's OS preference (see theme.properties `darkMode=true` upstream). */
+html.pf-v5-theme-dark body.theme-hr #keycloak-bg {
+  background: linear-gradient(160deg, #052b27 0%, var(--brand-900) 55%, var(--brand-700) 100%);
+}
+
+html.pf-v5-theme-dark body.theme-hr .pf-v5-c-login__main {
+  background: #0c1f1c;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.5);
+}
+
+html.pf-v5-theme-dark body.theme-hr .pf-v5-c-title,
+html.pf-v5-theme-dark body.theme-hr #kc-page-title {
+  color: #ecfdf5;
+}
+
+html.pf-v5-theme-dark body.theme-hr .brand-tagline {
+  color: #a7d8d1;
+}

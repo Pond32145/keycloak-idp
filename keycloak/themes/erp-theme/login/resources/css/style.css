@@ -1,0 +1,125 @@
+/*
+ * erp-theme — practical, structured, business-oriented identity.
+ * Scoped entirely under `body.theme-erp` (set via theme.properties'
+ * kcBodyClass) and layered on top of the inherited PatternFly styles.
+ */
+
+body.theme-erp {
+  --brand-900: #0f172a;
+  --brand-700: #1e293b;
+  --brand-500: #334155;
+  --brand-accent: #0ea5e9;
+  --brand-accent-light: #bae6fd;
+  --brand-surface: #ffffff;
+  --brand-text: #0f172a;
+}
+
+body.theme-erp #keycloak-bg {
+  background: linear-gradient(135deg, var(--brand-900) 0%, var(--brand-700) 50%, var(--brand-500) 100%);
+  min-height: 100vh;
+}
+
+body.theme-erp .pf-v5-c-login__container {
+  max-width: 1100px;
+}
+
+body.theme-erp .pf-v5-c-login__main {
+  background: var(--brand-surface);
+  border-radius: 8px;
+  border-top: 4px solid var(--brand-accent);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.4);
+  padding: 2.5rem 2.5rem 1.5rem;
+}
+
+body.theme-erp #kc-header-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+body.theme-erp #kc-header-wrapper::before {
+  content: "";
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background: url("../img/logo.svg") center / contain no-repeat;
+  flex-shrink: 0;
+}
+
+body.theme-erp .pf-v5-c-title,
+body.theme-erp #kc-page-title {
+  color: var(--brand-text);
+}
+
+body.theme-erp .brand-tagline {
+  margin: -0.25rem 0 1.25rem;
+  color: #475569;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+body.theme-erp .pf-v5-c-button.pf-m-primary {
+  background-color: var(--brand-700);
+  border-color: var(--brand-700);
+}
+
+body.theme-erp .pf-v5-c-button.pf-m-primary:hover,
+body.theme-erp .pf-v5-c-button.pf-m-primary:focus {
+  background-color: var(--brand-900);
+  border-color: var(--brand-900);
+}
+
+body.theme-erp a,
+body.theme-erp #kc-registration a,
+body.theme-erp .pf-v5-c-form__group a {
+  color: #0369a1;
+}
+
+body.theme-erp a:hover {
+  color: var(--brand-900);
+  text-decoration: underline;
+}
+
+/* Keep focus rings clearly visible for keyboard navigation (WCAG 2.4.7). */
+body.theme-erp input:focus,
+body.theme-erp .pf-v5-c-form-control:focus-within,
+body.theme-erp button:focus-visible,
+body.theme-erp a:focus-visible {
+  outline: 3px solid var(--brand-accent-light);
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  body.theme-erp .pf-v5-c-login__main {
+    padding: 1.5rem 1.25rem 1rem;
+    border-radius: 6px;
+  }
+
+  body.theme-erp #kc-header-wrapper::before {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+/* Dark mode: the inherited template toggles this class based on the
+   visitor's OS preference (see theme.properties `darkMode=true` upstream). */
+html.pf-v5-theme-dark body.theme-erp #keycloak-bg {
+  background: linear-gradient(135deg, #05070d 0%, var(--brand-900) 55%, var(--brand-700) 100%);
+}
+
+html.pf-v5-theme-dark body.theme-erp .pf-v5-c-login__main {
+  background: #111827;
+  border-top-color: var(--brand-accent);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+}
+
+html.pf-v5-theme-dark body.theme-erp .pf-v5-c-title,
+html.pf-v5-theme-dark body.theme-erp #kc-page-title {
+  color: #f1f5f9;
+}
+
+html.pf-v5-theme-dark body.theme-erp .brand-tagline {
+  color: #cbd5e1;
+}

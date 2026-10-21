@@ -1,0 +1,603 @@
+/* Tomorrow Portal login — ported from Colorlib's "Login Page V08" snippet
+   (colorlib.com/wp/template/login-page-08/, free for commercial use).
+   Layout, illustration and color palette are kept as in the source template;
+   only the brand/copy was changed (from "Sprout" to "Tomorrow") and a short
+   block was added below to make the snippet's own styles win over Keycloak's
+   PatternFly base instead of a host page's framework, which is what the
+   original reset block at the top of the source file was written for. */
+
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/nunito-400-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/nunito-400-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(../fonts/nunito-600-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(../fonts/nunito-600-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(../fonts/nunito-700-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(../fonts/nunito-700-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(../fonts/nunito-800-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(../fonts/nunito-800-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(../fonts/nunito-900-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(../fonts/nunito-900-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Mitr — a rounded, friendly Thai Google Font chosen to sit next to Nunito
+   without clashing: Nunito has zero Thai glyphs (see its unicode-range
+   above), so every Thai character in this theme was silently falling back
+   to a plain system font even though Nunito itself loaded correctly for
+   the few Latin bits ("Tomorrow", the arrow). Only the Thai-script subset
+   is downloaded (fonts.google.com/specimen/Mitr, OFL license, self-hosted
+   here — same offline-first approach as the Nunito files). Mitr tops out
+   at weight 700; text requesting 800/900 (titles, buttons) correctly falls
+   back to Mitr's 700 face for Thai characters per the CSS font-matching
+   spec — slightly less heavy than Nunito's black weight, but consistent
+   and intentional rather than an accidental system-font fallback. */
+@font-face {
+  font-family: 'Mitr';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/mitr-thai-400.woff2) format('woff2');
+  unicode-range: U+0E01-0E5B, U+200C-200D, U+25CC;
+}
+@font-face {
+  font-family: 'Mitr';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(../fonts/mitr-thai-500.woff2) format('woff2');
+  unicode-range: U+0E01-0E5B, U+200C-200D, U+25CC;
+}
+@font-face {
+  font-family: 'Mitr';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(../fonts/mitr-thai-600.woff2) format('woff2');
+  unicode-range: U+0E01-0E5B, U+200C-200D, U+25CC;
+}
+@font-face {
+  font-family: 'Mitr';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(../fonts/mitr-thai-700.woff2) format('woff2');
+  unicode-range: U+0E01-0E5B, U+200C-200D, U+25CC;
+}
+
+body.theme-tomorrow {
+  margin: 0;
+  /* Nunito covers Latin, Mitr covers Thai (see the comment above its
+     @font-face rules) — the browser picks per-character automatically
+     based on each font's unicode-range, so one font-family list correctly
+     handles both scripts without any per-locale CSS. "Noto Sans Thai" and
+     system-ui/Segoe UI remain as a safety net only, for any other script
+     neither self-hosted font covers. */
+  font-family: "Nunito", "Mitr", "Noto Sans Thai", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* --- Get out of PatternFly's way, the same way every other theme in this
+   project does it, so the snippet's own layout (below) owns the page. --- */
+body.theme-tomorrow #kc-header,
+body.theme-tomorrow #kc-header-wrapper,
+body.theme-tomorrow #kc-page-title,
+body.theme-tomorrow #kc-info,
+body.theme-tomorrow #kc-info-wrapper,
+body.theme-tomorrow .pf-v5-c-login__main-header {
+  display: none !important;
+}
+html, body.theme-tomorrow {
+  width: 100%;
+  min-height: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+body.theme-tomorrow #kc-content,
+body.theme-tomorrow #kc-content-wrapper,
+body.theme-tomorrow #kc-form,
+body.theme-tomorrow #kc-form-wrapper,
+body.theme-tomorrow .pf-v5-c-login,
+body.theme-tomorrow .pf-v5-c-login__container,
+body.theme-tomorrow .pf-v5-c-login__main,
+body.theme-tomorrow .pf-v5-c-login__main-body {
+  display: block !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* --- Everything below is the source snippet, unchanged (classes are its
+   own and namespaced, so nothing above or outside this block collides with
+   them — see the template's own README). --- */
+
+.cl-icon {
+  height: 1em;
+  width: auto;
+  fill: currentColor;
+  display: inline-block;
+}
+
+.cl-login08-demo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  place-items: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 40px 16px;
+  background: radial-gradient(circle at 8% 90%, #ffe38f 0 120px, transparent 121px),
+    radial-gradient(circle at 94% 8%, #c9d6ff 0 150px, transparent 151px),
+    #dff5e8;
+}
+
+.cl-login08 {
+  --cl-login08-ink: #2b1d16;
+  --cl-login08-muted: #5f4f47;
+  --cl-login08-tomato: #d63d1f;
+  --cl-login08-tomato-dark: #a82c12;
+  --cl-login08-leaf: #1f6d42;
+  --cl-login08-peach: #ffe7dc;
+  --cl-login08-error: #b3261e;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  width: 100%;
+  max-width: 960px;
+  overflow: hidden;
+  border-radius: 36px;
+  background: #fff;
+  box-shadow: 0 30px 60px -30px rgba(47, 138, 87, .45);
+  color: var(--cl-login08-ink);
+  line-height: 1.5;
+}
+
+.cl-login08 *,
+.cl-login08 *::before,
+.cl-login08 *::after {
+  box-sizing: border-box;
+}
+
+.cl-login08 [hidden] {
+  display: none !important;
+}
+
+.cl-login08__vh {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.cl-login08__art {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 40px 24px;
+  background: var(--cl-login08-peach);
+}
+
+.cl-login08__scene {
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+}
+
+.cl-login08__eyes-shut {
+  opacity: 0;
+}
+
+.cl-login08.is-shy .cl-login08__eyes-open {
+  opacity: 0;
+}
+
+.cl-login08.is-shy .cl-login08__eyes-shut {
+  opacity: 1;
+}
+
+.cl-login08__scene g {
+  transition: opacity .15s ease;
+}
+
+.cl-login08__tag {
+  margin: 0;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--cl-login08-leaf);
+  font-size: 14px;
+  font-weight: 800;
+  box-shadow: 0 6px 16px -8px rgba(229, 72, 42, .5);
+}
+
+.cl-login08__panel {
+  padding: clamp(28px, 5vw, 52px);
+}
+
+.cl-login08__topbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 22px;
+}
+
+.cl-login08__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+  color: var(--cl-login08-leaf);
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.cl-login08__locale {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  color: var(--cl-login08-muted);
+}
+
+.cl-login08__locale select {
+  appearance: none;
+  border: 2px solid #eadfd8;
+  border-radius: 999px;
+  padding: 6px 14px;
+  background: #fffaf7;
+  color: var(--cl-login08-ink);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.cl-login08__locale select:hover {
+  border-color: #d9c8be;
+}
+
+.cl-login08__locale select:focus-visible {
+  outline: 3px solid #6c8cff;
+  outline-offset: 2px;
+}
+
+.cl-login08__logo {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+}
+
+.cl-login08__logo svg {
+  width: 100%;
+  height: 100%;
+}
+
+.cl-login08__title {
+  margin: 0 0 6px;
+  font-size: clamp(28px, 3.4vw, 36px);
+  font-weight: 900;
+  letter-spacing: -.02em;
+  line-height: 1.1;
+}
+
+.cl-login08__sub {
+  margin: 0 0 26px;
+  color: var(--cl-login08-muted);
+  font-size: 17px;
+}
+
+.cl-login08__field {
+  margin-bottom: 16px;
+}
+
+.cl-login08__label {
+  display: block;
+  margin: 0 0 6px 6px;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.cl-login08__input {
+  display: block;
+  width: 100%;
+  min-height: 54px;
+  padding: 12px 20px;
+  border: 3px solid #eadfd8;
+  border-radius: 999px;
+  background: #fffaf7;
+  color: var(--cl-login08-ink);
+  font: inherit;
+  font-size: 17px;
+  font-weight: 600;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.cl-login08__input:hover {
+  border-color: #d9c8be;
+}
+
+.cl-login08__input:focus {
+  outline: none;
+  border-color: #6c8cff;
+  box-shadow: 0 0 0 5px rgba(108, 140, 255, .22);
+}
+
+.cl-login08__pw {
+  position: relative;
+}
+
+.cl-login08__pw .cl-login08__input {
+  padding-right: 60px;
+}
+
+.cl-login08__eye {
+  position: absolute;
+  top: 5px;
+  right: 6px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--cl-login08-muted);
+  cursor: pointer;
+}
+
+.cl-login08__eye:hover {
+  background: #f5ebe5;
+  color: var(--cl-login08-ink);
+}
+
+.cl-login08__eye-off,
+.cl-login08__eye[aria-pressed="true"] .cl-login08__eye-on {
+  display: none;
+}
+
+.cl-login08__eye[aria-pressed="true"] .cl-login08__eye-off {
+  display: block;
+}
+
+.cl-login08__caps {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 10px 0 0 10px;
+  padding: 6px 14px;
+  border-radius: 12px;
+  background: #ffe38f;
+  color: #5a3d00;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.cl-login08__caps::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 18px;
+  border: 6px solid transparent;
+  border-top: 0;
+  border-bottom-color: #ffe38f;
+}
+
+.cl-login08__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 4px 6px 24px;
+}
+
+.cl-login08__check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cl-login08__check input {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--cl-login08-leaf);
+}
+
+.cl-login08__link {
+  color: #3552d6;
+  font-weight: 800;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.cl-login08__link:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.cl-login08__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 58px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--cl-login08-tomato);
+  color: #fff;
+  font: inherit;
+  font-size: 18px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 6px 0 var(--cl-login08-tomato-dark);
+  transition: transform .1s ease, box-shadow .1s ease;
+}
+
+.cl-login08__submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 var(--cl-login08-tomato-dark);
+}
+
+.cl-login08__submit:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 var(--cl-login08-tomato-dark);
+}
+
+.cl-login08__submit:disabled {
+  opacity: .75;
+  cursor: wait;
+  transform: none;
+}
+
+.cl-login08__foot {
+  margin: 24px 0 0;
+  color: var(--cl-login08-muted);
+  font-size: 16px;
+  text-align: center;
+}
+
+.cl-login08__eye:focus-visible,
+.cl-login08__check input:focus-visible,
+.cl-login08__link:focus-visible,
+.cl-login08__submit:focus-visible {
+  outline: 3px solid #6c8cff;
+  outline-offset: 3px;
+}
+
+.cl-login08__error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 0 0 10px;
+  color: var(--cl-login08-error);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.cl-login08__error::before {
+  content: "\2639";
+  font-size: 18px;
+  line-height: 1;
+}
+
+.cl-login08__error:empty {
+  display: none;
+}
+
+.cl-login08__field.is-error .cl-login08__input {
+  border-color: #f08a7a;
+  background: #fff4f2;
+}
+
+@media (max-width: 780px) {
+  .cl-login08 {
+    grid-template-columns: minmax(0, 1fr);
+    border-radius: 28px;
+  }
+
+  .cl-login08__art {
+    padding: 20px 16px 16px;
+  }
+
+  .cl-login08__scene {
+    max-width: 200px;
+  }
+
+  .cl-login08__tag {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cl-login08 *,
+  .cl-login08 *::before,
+  .cl-login08 *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}

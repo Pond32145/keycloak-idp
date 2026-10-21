@@ -1,0 +1,82 @@
+name: tomorrow-auth
+
+services:
+  postgres:
+    image: postgres:16.6-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:?Set POSTGRES_DB in .env}
+      POSTGRES_USER: ${POSTGRES_USER:?Set POSTGRES_USER in .env}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    # Not published: the database is only reachable from other containers on
+    # the "tomorrow-auth" compose network, never from the host or internet.
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.8.1
+    restart: unless-stopped
+    command: start-dev --import-realm
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      # --- Database ---
+      KC_DB: postgres
+      KC_DB_URL_HOST: postgres
+      KC_DB_URL_DATABASE: ${POSTGRES_DB:?Set POSTGRES_DB in .env}
+      KC_DB_USERNAME: ${POSTGRES_USER:?Set POSTGRES_USER in .env}
+      KC_DB_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+
+      # --- Bootstrap admin (first boot only) ---
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KC_BOOTSTRAP_ADMIN_USERNAME:?Set KC_BOOTSTRAP_ADMIN_USERNAME in .env}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KC_BOOTSTRAP_ADMIN_PASSWORD:?Set KC_BOOTSTRAP_ADMIN_PASSWORD in .env}
+
+      # --- Hostname / dev networking ---
+      KC_HOSTNAME: ${KC_HOSTNAME:-localhost}
+      KC_HOSTNAME_STRICT: "false"
+      KC_HTTP_ENABLED: "true"
+
+      # --- Health endpoint (served on the management port, 9000) ---
+      KC_HEALTH_ENABLED: "true"
+
+      # --- Theme development ergonomics ---
+      # Disables theme/template/static caching so edits under ./keycloak/themes
+      # are picked up on the next page load without restarting the container.
+      # Remove/flip these to the defaults (cache enabled) for production.
+      KC_SPI_THEME_STATIC_MAX_AGE: "-1"
+      KC_SPI_THEME_CACHE_THEMES: "false"
+      KC_SPI_THEME_CACHE_TEMPLATES: "false"
+    ports:
+      # Bound to localhost only; not reachable from other hosts by default.
+      - "127.0.0.1:${KEYCLOAK_PORT:-8080}:8080"
+    volumes:
+      # Bind mount: add/edit theme files on the host, no image rebuild needed.
+      - ./keycloak/themes:/opt/keycloak/themes
+      # Example realm is imported once on a fresh database via --import-realm
+      # above. Keycloak skips the import if the realm already exists, so this
+      # never overwrites realm/user data on a normal restart.
+      - ./realm:/opt/keycloak/data/import:ro
+    healthcheck:
+      # The image ships neither curl nor wget, so the readiness probe speaks
+      # raw HTTP to the management port (9000) via bash's /dev/tcp.
+      test:
+        - "CMD-SHELL"
+        - >-
+          bash -c 'exec 3<>/dev/tcp/127.0.0.1/9000;
+          printf "GET /health/ready HTTP/1.1\r\nHost: localhost\r\nConnection: close\r\n\r\n" >&3;
+          timeout 5 cat <&3' | grep -q '"status": "UP"'
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+
+volumes:
+  pgdata:
+    name: tomorrow-auth-pgdata

@@ -1,0 +1,17 @@
+# Secrets / local config
+.env
+*.env.local
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Keycloak runtime artifacts that should never be committed
+keycloak/data/
+*.log
+
+# Any local export dumps taken for backup/testing
+realm/*-export-*.json
+db-backups/

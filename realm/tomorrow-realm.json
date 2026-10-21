@@ -1,0 +1,129 @@
+{
+  "realm": "tomorrow",
+  "enabled": true,
+  "displayName": "Tomorrow",
+  "displayNameHtml": "<strong>Tomorrow</strong>",
+
+  "loginTheme": "portal-theme",
+
+  "internationalizationEnabled": true,
+  "supportedLocales": ["en", "th"],
+  "defaultLocale": "en",
+
+  "registrationAllowed": true,
+  "registrationEmailAsUsername": false,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": true,
+  "rememberMe": true,
+  "verifyEmail": false,
+  "editUsernameAllowed": false,
+
+  "sslRequired": "external",
+  "bruteForceProtected": true,
+  "permanentLockout": false,
+  "failureFactor": 10,
+  "maxFailureWaitSeconds": 900,
+  "waitIncrementSeconds": 60,
+
+  "accessTokenLifespan": 300,
+  "ssoSessionIdleTimeout": 1800,
+  "ssoSessionMaxLifespan": 36000,
+
+  "clients": [
+    {
+      "clientId": "web-portal",
+      "name": "Web Portal",
+      "description": "Employee/customer-facing portal — uses portal-theme for its login page.",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "redirectUris": [
+        "http://localhost:3010/*",
+        "http://localhost:5190/*"
+      ],
+      "webOrigins": [
+        "http://localhost:3010",
+        "http://localhost:5190"
+      ],
+      "attributes": {
+        "login_theme": "portal-theme",
+        "pkce.code.challenge.method": "S256",
+        "post.logout.redirect.uris": "http://localhost:3010/*##http://localhost:5190/*"
+      }
+    },
+    {
+      "clientId": "hr-web",
+      "name": "HR Web",
+      "description": "HR self-service application — uses hr-theme for its login page.",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "redirectUris": [
+        "http://localhost:3001/*"
+      ],
+      "webOrigins": [
+        "http://localhost:3001"
+      ],
+      "attributes": {
+        "login_theme": "hr-theme",
+        "pkce.code.challenge.method": "S256",
+        "post.logout.redirect.uris": "http://localhost:3001/*"
+      }
+    },
+    {
+      "clientId": "erp-web",
+      "name": "ERP Web",
+      "description": "ERP application — uses erp-theme for its login page.",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "redirectUris": [
+        "http://localhost:3002/*"
+      ],
+      "webOrigins": [
+        "http://localhost:3002"
+      ],
+      "attributes": {
+        "login_theme": "erp-theme",
+        "pkce.code.challenge.method": "S256",
+        "post.logout.redirect.uris": "http://localhost:3002/*"
+      }
+    },
+    {
+      "clientId": "report-web",
+      "name": "Report Web",
+      "description": "Reporting/analytics application — uses report-theme for its login page.",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "redirectUris": [
+        "http://localhost:3003/*"
+      ],
+      "webOrigins": [
+        "http://localhost:3003"
+      ],
+      "attributes": {
+        "login_theme": "report-theme",
+        "pkce.code.challenge.method": "S256",
+        "post.logout.redirect.uris": "http://localhost:3003/*"
+      }
+    }
+  ]
+}
